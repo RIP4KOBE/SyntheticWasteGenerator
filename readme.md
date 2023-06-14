@@ -19,8 +19,8 @@ With the help of adjustable parameters, SWaG can be customized, such that unique
 In the first step, SWaG takes arbitrary original object models from [ShapeNet](https://shapenet.org/) as input and automatically outputs their counterparts as MSW via DPS(Deformed by Physical Simulation) technology. Specifically, we use [Houdini](https://www.sidefx.com/) as DPS backend to implement plastic deformation of rigid bodies for generating synthetic 3D MSW models.
 
 ### Requirments
--  Houdini 19.5(apprentice)
--  Python 3.8
+-  Houdini 19.5
+-  Python 3.8 
 
 ### Single 3D Model DPS
 <!-- See [SDPS.md](./SDPS.md). -->
@@ -104,8 +104,8 @@ Based on the functionalities of Replicator and Isaac Sim, we are able to generat
    cd .local/share/ov/pkg/isaac_sim-2022.2.0
    ./python.sh ./2D_image_generation/scripts/generate_msw_wastenet.py --root $WASTENET_LOCAL_DIR'_nomat' --categories can bottle --max_asset_size 50
    ```
-   An example of the automatically generated MSW image and annotations are shown below:
-   ![overview](docs/generated_msw_image.png)
+Examples of the automatically generated MSW images and annotations are shown below:
+   ![overview](docs/msw_data_generation.gif)
 
 ## MSW Recognition Model Training and Inference
 After generating large-scale photorealistic MSW image data, it is required to validate the effectiveness of the synthetic data by training and testing the MSW Recognition Model.
@@ -119,15 +119,17 @@ cd .local/share/ov/pkg/isaac_sim-2022.2.0/
 where `--visualize` is an `optional` flag. If given, the evaluation results for a certain iteration round of the trainig process will be saved in `2D_image_generation/assests/_out_train_imgs`. For example, the evaluation results of iteration 150 round is shown below:
 ![overview](docs/training_visualization.png)
 
-### Model Inference
-After training the model, you can use the [inference script](2D_image_generation/scripts/msw_recognition.py) for testing the model on a batch of real-world MSW images and visualizing the results:
+### Model Inference 
+After training the model, you can use the [inference script](2D_image_generation/scripts/msw_recognition.py) to test the model on a batch of real-world MSW images and visualizing the results. You need to finish the model training process and store a .pth file under `2D_image_generation/models`. Or you can use the [pretrained model](https://drive.google.com/file/d/1epr53cAT808u-AIjarOvi-g6YVmfvcq9/view) for inference:
+-  Download the [pretrained model](https://drive.google.com/file/d/1epr53cAT808u-AIjarOvi-g6YVmfvcq9/view) and put it under `2D_image_generation/models`.
+-  Test the model with the following command:
 
-```shell
-cd .local/share/ov/pkg/isaac_sim-2022.2.0/
-./python.sh 2D_image_generation/scripts/msw_recognition.py --root --visualize --categories can bottle
-```
+   ```shell
+   cd .local/share/ov/pkg/isaac_sim-2022.2.0/
+   ./python.sh 2D_image_generation/scripts/msw_recognition.py --root --visualize --categories can bottle
+   ```
 where `--visualize` is an `optional` flag. If given, the recognized results will be saved in `2D_image_generation/assests/_out_recognized_imgs`. `--root ` is an `defult` parameter that specifies the root directory containing the real-world msw images. This script will load the images one-by-one and display both the raw image and the recognized results: 
-![overview](docs/msw_inference.png)
+   ![overview](docs/msw_inference.png)
 
 
 
