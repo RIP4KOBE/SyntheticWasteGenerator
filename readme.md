@@ -24,13 +24,13 @@ In the first step, SWaG takes arbitrary original object models from [ShapeNet](h
 
 ### Single 3D Model DPS
 <!-- See [SDPS.md](./SDPS.md). -->
-We first introduce how to generate single 3D MSW modle via DPS in Houdini.
+We first introduce how to generate single 3D MSW model via DPS in Houdini.
 #### User Guide
-1.  Select a 3D shape(usually in .obj format) from [ShapeNet](https://shapenet.org/).
+-  Select a 3D shape(usually in .obj format) from [ShapeNet](https://shapenet.org/).
    ![overview](docs/3D_shape_houdini.png)
-2.  Build the Houdini network as shown below:
+-  Build the Houdini network as shown below:
    ![overview](docs/SDPS_network.png)
-3. Import the path of the selected 3D shape as the parameter of `file` node in the Houdini network, set the parameters of the other nodes properly. Details of parameter settings for different nodes can be found [here](https://clumsy-angora-757.notion.site/DPS-e896c9b6e4b949e4960dbeca092cfff4).
+-  Import the path of the selected 3D shape as the parameter of `file` node in the Houdini network, set the parameters of the other nodes properly. Details of parameter settings for different nodes can be found [here](https://clumsy-angora-757.notion.site/DPS-e896c9b6e4b949e4960dbeca092cfff4).
 #### Run Demos
 To start the DPS process for a Single MSW Model, you just need to launch the Houdini simulation after completing the above steps. We select a coke can with a customized texture as an example:
    ![overview](docs/can_crushing_with_CUHK.gif)  
@@ -38,12 +38,12 @@ To start the DPS process for a Single MSW Model, you just need to launch the Hou
 ### Batch 3D Model DPS
 To improve the efficiency of Single 3D MSW model DPS process, we use the [Python API](https://www.sidefx.com/docs/houdini/hom/hou/index.html) provided by Houdini to generate MSW models in batch from 3D shapes.
 #### User Guide
-1. Launch `External Python Editor` in Houdini.
+-  Launch `External Python Editor` in Houdini.
    ![overview](docs/External_Python_Editor.png)
-2. Copy `./3D_model_generation/shapenet_can_crushing_dps.py` into `External Python Editor` and modify the parameters `shapenet_category_path` and `dps_saved_path` according to your local path.
-3. Add `Python shell` in Houdini command window.
+-  Copy `./3D_model_generation/shapenet_can_crushing_dps.py` into `External Python Editor` and modify the parameters `shapenet_category_path` and `dps_saved_path` according to your local path.
+-  Add `Python shell` in Houdini command window.
    <!-- ![overview](docs/python_shell.png) -->
-4. Run the command in `Python shell` to generate MSW models in batch: 
+-  Run the command in `Python shell` to generate MSW models in batch: 
    ```python
    >>> dps = hou.session.Crushing_DPS()
    >>> dps.run()
@@ -120,7 +120,7 @@ where `--visualize` is an `optional` flag. If given, the evaluation results for 
 ![overview](docs/training_visualization.png)
 
 ### Model Inference 
-After training the model, you can use the [inference script](2D_image_generation/scripts/msw_recognition.py) to test the model on a batch of real-world MSW images and visualizing the results. You need to finish the model training process and store a .pth file under `2D_image_generation/models`. Or you can use the [pretrained model](https://drive.google.com/file/d/1epr53cAT808u-AIjarOvi-g6YVmfvcq9/view) for inference:
+After training the model, you can use the [inference script](2D_image_generation/scripts/msw_recognition.py) to test the model on a batch of real-world MSW images and visualize the results. You need to finish the model training process and store a .pth file under `2D_image_generation/models`. Or you can use the [pretrained model](https://drive.google.com/file/d/1epr53cAT808u-AIjarOvi-g6YVmfvcq9/view) for inference:
 -  Download the [pretrained model](https://drive.google.com/file/d/1epr53cAT808u-AIjarOvi-g6YVmfvcq9/view) and put it under `2D_image_generation/models`.
 -  Test the model with the following command:
 
